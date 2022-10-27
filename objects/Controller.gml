@@ -17,6 +17,8 @@ flip_tris=false
 culling=cull_none
 
 gizmosurf=-1
+
+room_speed=display_get_frequency()
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
