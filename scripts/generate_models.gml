@@ -82,7 +82,6 @@ i=-1 repeat (facec) { i+=1
             }
         }
     }
-    d3d_model_primitive_end(mdl)
 }
 ds_map_destroy(modelmap)
 with (ModelExport) instance_destroy()
