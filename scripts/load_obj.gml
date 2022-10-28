@@ -16,7 +16,8 @@ groupnames=ds_map_create()
 var current_mat; current_mat=-1
 var current_group; current_group=""
 while (!file_text_eof(f)) {
-    var line; line=merge_spaces(file_text_read_string(f))
+    var oline; oline=file_text_read_string(f)
+    var line; line=merge_spaces(oline)
     file_text_readln(f)
     string_token_start(line," ")
     var cmd; cmd=string_token_next()
@@ -64,7 +65,7 @@ while (!file_text_eof(f)) {
             facec+=1
         }break
         case "mtllib": {
-            load_mtllib(string_token_next())
+            load_mtllib(string_remainder(oline))
         }break
         case "usemtl": {
             var newmat; newmat=string_token_next()

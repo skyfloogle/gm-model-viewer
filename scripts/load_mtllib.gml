@@ -10,7 +10,8 @@ var current_matname; current_matname=""
 var current_mat; current_mat=0
 
 while (!file_text_eof(f)) {
-    var line; line=merge_spaces(file_text_read_string(f))
+    var oline; oline=file_text_read_string(f)
+    var line; line=merge_spaces(oline)
     file_text_readln(f)
     string_token_start(line," ")
     var cmd; cmd=string_token_next()
@@ -25,7 +26,7 @@ while (!file_text_eof(f)) {
             matc+=1
         }break
         case "map_Kd": {
-            var tex; tex=string_token_next()
+            var tex; tex=string_remainder(oline)
             if (file_exists(tex)) {
                 mats[current_mat,1]=background_add(tex,false,false)
             } else {
