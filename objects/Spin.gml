@@ -24,7 +24,7 @@ with (Controller) {
     var dir,len,ang;
     dir=point_direction(0,0,variable_local_get(a),variable_local_get(b))
     len=point_distance(0,0,variable_local_get(a),variable_local_get(b))
-    for (ang=0;ang<360;ang+=360/room_speed) {
+    for (ang=0;ang<360;ang+=360/min(fps_real,room_speed)) {
         variable_local_set(a,lengthdir_x(len,dir+ang))
         variable_local_set(b,lengthdir_y(len,dir+ang))
         screen_redraw()
