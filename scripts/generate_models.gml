@@ -9,6 +9,7 @@ modelc=0
 var modelmap; modelmap=ds_map_create()
 i=-1 repeat (facec) { i+=1
     var g,mat; g=faces[i,0] mat=faces[i,1]
+    var blend; if (mat>=0) blend=mats[mat,2] else blend=c_white
     var mkey; mkey=strong(g,"_",mat)
     var mdl; if (ds_map_exists(modelmap,mkey)) {
         mdl=dsmap(modelmap,mkey)
@@ -35,7 +36,11 @@ i=-1 repeat (facec) { i+=1
                     axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
                     axsc[0]*norms[n,axto[0]],axsc[1]*norms[n,axto[1]],axsc[2]*norms[n,axto[2]],
                     texs[t,0],texs[t,1],
-                    make_color_rgb(verts[v,3]*255,verts[v,4]*255,verts[v,5]*255),
+                    make_color_rgb(
+                        verts[v,3]*color_get_red(blend),
+                        verts[v,4]*color_get_red(blend),
+                        verts[v,5]*color_get_red(blend),
+                    ),
                     1
                 )
             } else if (n>=0) {
@@ -43,7 +48,11 @@ i=-1 repeat (facec) { i+=1
                     models[mdl,0],
                     axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
                     axsc[0]*norms[n,axto[0]],axsc[1]*norms[n,axto[1]],axsc[2]*norms[n,axto[2]],
-                    make_color_rgb(verts[v,3]*255,verts[v,4]*255,verts[v,5]*255),
+                    make_color_rgb(
+                        verts[v,3]*color_get_red(blend),
+                        verts[v,4]*color_get_red(blend),
+                        verts[v,5]*color_get_red(blend),
+                    ),
                     1
                 )
             } else if (t>=0) {
@@ -51,14 +60,22 @@ i=-1 repeat (facec) { i+=1
                     models[mdl,0],
                     axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
                     texs[t,0],texs[t,1],
-                    make_color_rgb(verts[v,3]*255,verts[v,4]*255,verts[v,5]*255),
+                    make_color_rgb(
+                        verts[v,3]*color_get_red(blend),
+                        verts[v,4]*color_get_red(blend),
+                        verts[v,5]*color_get_red(blend),
+                    ),
                     1
                 )
             } else {
                 d3d_model_vertex_color(
                     models[mdl,0],
                     axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
-                    make_color_rgb(verts[v,3]*255,verts[v,4]*255,verts[v,5]*255),
+                    make_color_rgb(
+                        verts[v,3]*color_get_red(blend),
+                        verts[v,4]*color_get_red(blend),
+                        verts[v,5]*color_get_red(blend),
+                    ),
                     1
                 )
             }
