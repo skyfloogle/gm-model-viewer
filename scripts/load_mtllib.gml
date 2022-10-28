@@ -19,7 +19,7 @@ while (!file_text_eof(f)) {
             current_matname=string_token_next()
             current_mat=matc
             mats[current_mat,0]=current_matname
-            mats[current_mat,1]=-1
+            mats[current_mat,1]=bgBlank
             mats[current_mat,2]=c_white
             dsmap(matnames,current_matname,matc)
             matc+=1
