@@ -23,7 +23,9 @@ while (!file_text_eof(f)) {
             matc+=1
         }break
         case "map_Kd": {
-            mats[current_mat,1]=background_add(string_token_next(),false,false)
+            var tex; tex=string_token_next()
+            if (!file_exists(tex)) show_message(tex+"#was not found.")
+            mats[current_mat,1]=background_add(tex,false,false)
         }break
         case "Kd": {
             mats[current_mat,2]=make_color_rgb(
