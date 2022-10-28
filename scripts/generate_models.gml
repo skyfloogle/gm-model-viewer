@@ -20,8 +20,15 @@ i=-1 repeat (facec) { i+=1
         models[mdl,1]=o
         models[mdl,2]=g
         models[mdl,3]=mat
+        models[mdl,4]=0
         dsmap(modelmap,mkey,mdl)
         modelc+=1
+    }
+    models[mdl,4]+=max(0,faces[i,3]-2)*3
+    if (models[mdl,4]>32000) {
+        d3d_model_primitive_end(models[mdl,0])
+        d3d_model_primitive_begin(models[mdl,0],pr_trianglelist)
+        models[mdl,4]=(faces[i,3]-2)*3
     }
     j=0 repeat (faces[i,3]-2) { j+=1
         var bits; bits[0]=0 bits[1]=j bits[2]=j+1
