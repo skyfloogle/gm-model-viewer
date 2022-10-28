@@ -12,7 +12,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var fn; fn=get_open_filename("*.obj","")
+var fn; fn=get_open_filename("Wavefront OBJ|*.obj","")
 if (!file_exists(fn)) exit
 with (Controller) {
     load_obj(fn)
