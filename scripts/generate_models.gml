@@ -25,7 +25,7 @@ i=-1 repeat (facec) { i+=1
     }
     j=0 repeat (faces[i,3]-2) { j+=1
         var bits; bits[0]=0 bits[1]=j bits[2]=j+1
-        k=pick(flip_tris,0,2) repeat (faces[i,3]) {
+        k=pick(flip_tris,0,2) repeat (3) {
             var v,t,n;
             v=faces[i,bits[k]*3+4]
             t=faces[i,bits[k]*3+5]
