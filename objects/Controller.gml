@@ -19,6 +19,14 @@ culling=cull_none
 gizmosurf=-1
 
 room_speed=display_get_frequency()
+#define Step_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///Window caption
+room_caption=strong("Game Maker 3D Viewer - ",fps," FPS")
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
