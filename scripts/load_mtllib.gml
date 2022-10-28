@@ -1,9 +1,11 @@
 ///load_mtllib(fn)
 var f; f=file_text_open_read(argument0)
 if (f<0) {
-    show_message("Material file "+argument0+"#does not exist.")
+    show_error("Material file "+argument0+" does not exist.",false)
     exit
 }
+var olddir; olddir=working_directory
+set_working_directory(filename_path(argument0))
 var current_matname; current_matname=""
 var current_mat; current_mat=0
 
@@ -24,8 +26,12 @@ while (!file_text_eof(f)) {
         }break
         case "map_Kd": {
             var tex; tex=string_token_next()
-            if (!file_exists(tex)) show_message(tex+"#was not found.")
-            mats[current_mat,1]=background_add(tex,false,false)
+            if (file_exists(tex)) {
+                mats[current_mat,1]=background_add(tex,false,false)
+            } else {
+                show_error("Texture file "+tex+" was not found.",false)
+                mats[current_mat,1]=bgBlank
+            }
         }break
         case "Kd": {
             mats[current_mat,2]=make_color_rgb(
@@ -37,3 +43,4 @@ while (!file_text_eof(f)) {
     }
 }
 file_text_close(f)
+set_working_directory(olddir)

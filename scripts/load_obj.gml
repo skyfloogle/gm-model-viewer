@@ -1,7 +1,7 @@
 ///load_obj(fname)
 var f; f=file_text_open_read(argument0)
 if (f<0) {
-    show_message(".obj file does not exist.")
+    show_error("OBJ file "+argument0+" does not exist.",false)
     exit
 }
 set_working_directory(filename_path(argument0))
