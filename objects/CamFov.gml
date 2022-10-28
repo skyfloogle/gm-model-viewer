@@ -6,7 +6,7 @@ applies_to=self
 */
 with (Controller) {
     var new_fov;
-    new_fov=real(get_string("FOV",fov))
+    new_fov=real(get_string("FOV",string(fov)))
     if (new_fov!=0) {
         fov=new_fov
     } else {

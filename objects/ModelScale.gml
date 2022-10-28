@@ -6,7 +6,7 @@ applies_to=self
 */
 with (Controller) {
     var new_scale;
-    new_scale=real(get_string("Scale",scale))
+    new_scale=real(get_string("Scale",string(scale)))
     if (new_scale!=0) {
         scale=new_scale
         generate_models()
