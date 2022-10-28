@@ -15,6 +15,7 @@ matnames=ds_map_create()
 groupnames=ds_map_create()
 var current_mat; current_mat=-1
 var current_group; current_group=""
+var current_obj; current_obj=""
 while (!file_text_eof(f)) {
     var oline; oline=file_text_read_string(f)
     var line; line=merge_spaces(oline)
@@ -45,21 +46,22 @@ while (!file_text_eof(f)) {
             variable_local_set(varname+"c",variable_local_get(varname+"c")+1)
         }break
         case "f": {
-            faces[facec,0]=current_group
-            faces[facec,1]=current_mat
+            faces[facec,0]=current_obj
+            faces[facec,1]=current_group
+            faces[facec,2]=current_mat
             // load all points
             var points,pointc; pointc=-1
             do {
                 pointc+=1
                 points[pointc]=string_token_next()
             } until (points[pointc]=="")
-            faces[facec,2]=pointc
+            faces[facec,3]=pointc
             for (i=0;i<pointc;i+=1) {
                 string_token_start(points[i],"/")
                 for (j=0;j<3;j+=1) {
                     tmp=string_token_next()
-                    if (tmp!="") faces[facec,3+i*3+j]=real(tmp)-1
-                    else faces[facec,3+i*3+j]=-1
+                    if (tmp!="") faces[facec,4+i*3+j]=real(tmp)-1
+                    else faces[facec,4+i*3+j]=-1
                 }
             }
             facec+=1
@@ -75,6 +77,9 @@ while (!file_text_eof(f)) {
                 show_message("This model is missing a material '"+newmat+"'.#Those parts will appear as white.")
                 current_mat=-1
             }
+        }break
+        case "o": {
+            current_obj=string_token_next()
         }break
         case "g": {
             current_group=string_token_next()

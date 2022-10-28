@@ -12,10 +12,15 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var g,mat;
-g=Controller.models[m,1]
-mat=Controller.models[m,2]
+var o,g,mat;
+o=Controller.models[m,1]
+g=Controller.models[m,2]
+mat=Controller.models[m,3]
 var fn; fn=""
+if (o!="") {
+    fn+=o
+    if (g!="" || mat>=0) fn+="_"
+}
 if (g!="") {
     fn+=g
     if (mat>=0) fn+="_"
@@ -33,11 +38,16 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var g,mat;
-g=Controller.models[m,1]
-mat=Controller.models[m,2]
-var Y; Y=y-20*((g!="")+(mat>=0))
+var o,g,mat;
+o=Controller.models[m,1]
+g=Controller.models[m,2]
+mat=Controller.models[m,3]
+var Y; Y=y-20*((o!="")+(g!="")+(mat>=0))
 draw_set_halign(fa_right)
+if (o!="") {
+    draw_text(room_width-4,Y,"o:"+o)
+    Y+=20
+}
 if (g!="") {
     draw_text(room_width-4,Y,"g:"+g)
     Y+=20

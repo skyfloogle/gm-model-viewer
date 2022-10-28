@@ -39,7 +39,7 @@ d3d_set_projection_ext(camx,camy,camz,0,0,0,upx,upy,upz,fov,room_width/room_heig
 dx8_set_cull_mode(culling)
 texture_set_repeat(true)
 i=-1 repeat (modelc) { i+=1
-    var mat; mat=models[i,2]
+    var mat; mat=models[i,3]
     var tex;
     if (mat>=0) tex=background_get_texture(mats[mat,1]) else tex=-1
     d3d_model_draw(models[i,0],0,0,0,tex)

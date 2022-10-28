@@ -8,27 +8,28 @@ with (ModelFlip) {
 modelc=0
 var modelmap; modelmap=ds_map_create()
 i=-1 repeat (facec) { i+=1
-    var g,mat; g=faces[i,0] mat=faces[i,1]
+    var o,g,mat; o=faces[i,0] g=faces[i,1] mat=faces[i,2]
     var blend; if (mat>=0) blend=mats[mat,2] else blend=c_white
-    var mkey; mkey=strong(g,"_",mat)
+    var mkey; mkey=strong(o,"_",g,"_",mat)
     var mdl; if (ds_map_exists(modelmap,mkey)) {
         mdl=dsmap(modelmap,mkey)
     } else {
         mdl=modelc
         models[mdl,0]=d3d_model_create()
         d3d_model_primitive_begin(models[mdl,0],pr_trianglelist)
-        models[mdl,1]=g
-        models[mdl,2]=mat
+        models[mdl,1]=o
+        models[mdl,2]=g
+        models[mdl,3]=mat
         dsmap(modelmap,mkey,mdl)
         modelc+=1
     }
-    j=0 repeat (faces[i,2]-2) { j+=1
+    j=0 repeat (faces[i,3]-2) { j+=1
         var bits; bits[0]=0 bits[1]=j bits[2]=j+1
-        k=pick(flip_tris,0,2) repeat (faces[i,2]) {
+        k=pick(flip_tris,0,2) repeat (faces[i,3]) {
             var v,t,n;
-            v=faces[i,bits[k]*3+3]
-            t=faces[i,bits[k]*3+4]
-            n=faces[i,bits[k]*3+5]
+            v=faces[i,bits[k]*3+4]
+            t=faces[i,bits[k]*3+5]
+            n=faces[i,bits[k]*3+6]
             k+=pick(flip_tris,1,-1)
             if (n>=0 && t>=0) {
                 d3d_model_vertex_normal_texture_color(
@@ -85,10 +86,10 @@ i=-1 repeat (facec) { i+=1
 }
 ds_map_destroy(modelmap)
 with (ModelExport) instance_destroy()
-var Y; Y=150
+var Y; Y=100
 i=-1 repeat (modelc) { i+=1
+    Y+=30+20*(models[i,1]!="")+20*(models[i,2]!="")+20*(models[i,3]>=0)
     d3d_model_primitive_end(models[i,0])
     (instance_create(room_width-80,Y,ModelExport)).m=i
-    Y+=30+20*(models[i,1]!="")+20*(models[i,2]>=0)
 }
 with (ModelExport) event_perform(ev_other,ev_room_start)
