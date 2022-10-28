@@ -13,7 +13,7 @@ upy=1
 upz=0
 fov=45
 scale=1
-flip_tris=false
+flip_tris=true
 culling=cull_none
 
 gizmosurf=-1
