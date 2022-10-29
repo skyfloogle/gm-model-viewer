@@ -6,6 +6,7 @@ applies_to=self
 */
 surf=-1
 drag=false
+dragme=false
 event_step()
 #define Step_0
 /*"/*'/**//* YYD ACTION
@@ -14,7 +15,7 @@ action_id=603
 applies_to=self
 */
 ///drag
-if (!mouse_check_button(mb_left)) drag=false
+if (!mouse_check_button(mb_left)) {dragme=false drag=false}
 if (drag) {
     var xac,yac;
     xac=(mouse_x-grab_mx)
@@ -68,7 +69,7 @@ applies_to=self
 ///render
 surf=dx8_surface_engage(surf,100,100)
 var prim,sec; prim=192 sec=0
-if (drag) {prim=255 sec=64}
+if (dragme) {prim=255 sec=64}
 else if (collision_point(mouse_x,mouse_y,id,false,false)) prim=255
 with (Controller) {
     d3d_start()
@@ -92,19 +93,22 @@ with (Controller) {
     d3d_end()
 }
 dx8_surface_disengage()
-#define Mouse_4
+#define Mouse_53
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-drag=true
-grab_mx=mouse_x
-grab_my=mouse_y
-ocamx=Controller.camx
-ocamy=Controller.camy
-ocamz=Controller.camz
-odist=point_distance_3d(0,0,0,ocamx,ocamy,ocamz)
+dragme=collision_point(mouse_x,mouse_y,id,false,false)
+if (dragme || point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_height)) {
+    drag=true
+    grab_mx=mouse_x
+    grab_my=mouse_y
+    ocamx=Controller.camx
+    ocamy=Controller.camy
+    ocamz=Controller.camz
+    odist=point_distance_3d(0,0,0,ocamx,ocamy,ocamz)
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
