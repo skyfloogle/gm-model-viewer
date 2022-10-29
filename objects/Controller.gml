@@ -18,6 +18,8 @@ culling=cull_none
 
 gizmosurf=-1
 
+genmodels=void
+
 room_speed=display_get_frequency()
 #define Step_0
 /*"/*'/**//* YYD ACTION

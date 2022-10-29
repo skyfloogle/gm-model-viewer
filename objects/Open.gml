@@ -15,6 +15,6 @@ applies_to=self
 var fn; fn=get_open_filename("Wavefront OBJ|*.obj","")
 if (!file_exists(fn)) exit
 with (Controller) {
-    load_obj(fn)
+    load_model(fn)
     generate_models()
 }

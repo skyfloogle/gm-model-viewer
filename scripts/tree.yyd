@@ -1,5 +1,8 @@
 |merge_spaces
 |load_obj
 |load_mtllib
-|generate_models
+|generate_models_obj
 |string_remainder
+|void
+|generate_models
+|load_model
