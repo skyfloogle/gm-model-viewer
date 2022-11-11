@@ -73,7 +73,7 @@ if (dragme) {prim=255 sec=64}
 else if (collision_point(mouse_x,mouse_y,id,false,false)) prim=255
 with (Controller) {
     d3d_start()
-    draw_clear_alpha(0,0)
+    draw_clear(c_black)
     var camdist; camdist=point_distance_3d(0,0,0,camx,camy,camz)/(sqrt(2))
     d3d_set_projection_ext(camx/camdist,camy/camdist,camz/camdist,0,0,0,upx,upy,upz,90,1,0.01,10)
     draw_set_color(make_color_rgb(prim,sec,sec))

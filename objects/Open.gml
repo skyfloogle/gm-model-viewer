@@ -18,3 +18,13 @@ with (Controller) {
     load_model(fn)
     generate_models()
 }
+#define Draw_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+draw_set_color(c_black)
+draw_rectangle(room_width-100,0,room_width,130,false)
+draw_set_color(c_white)
+event_inherited()

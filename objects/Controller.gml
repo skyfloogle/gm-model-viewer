@@ -39,6 +39,10 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
     camx/=1.1
     camy/=1.1
     camz/=1.1
+} else if (point_in_rectangle(mouse_x,mouse_y,room_width-100,100,room_width,room_height)) {
+    var ok; ok=false
+    with (ModelExport) if (y<ystart) {ok=true break}
+    if (ok) with (ModelExport) y+=8
 }
 #define Mouse_61
 /*"/*'/**//* YYD ACTION
@@ -50,6 +54,10 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
     camx*=1.1
     camy*=1.1
     camz*=1.1
+} else if (point_in_rectangle(mouse_x,mouse_y,room_width-100,100,room_width,room_height)) {
+    var ok; ok=false
+    with (ModelExport) if (y>room_height-30) {ok=true break}
+    if (ok) with (ModelExport) y-=8
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION
