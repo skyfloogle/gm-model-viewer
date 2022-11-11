@@ -29,6 +29,28 @@ applies_to=self
 */
 ///Window caption
 room_caption=strong("Game Maker 3D Viewer - ",fps," FPS")
+#define Mouse_60
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_height)) {
+    camx/=1.1
+    camy/=1.1
+    camz/=1.1
+}
+#define Mouse_61
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_height)) {
+    camx*=1.1
+    camy*=1.1
+    camz*=1.1
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
