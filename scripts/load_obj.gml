@@ -26,7 +26,7 @@ var lasttime; lasttime=0
 while (!file_text_eof(f)) {
     if (current_time>lasttime+100) {
         lasttime=current_time
-        loading_message(strong("Allocating memory...#",filecompleted*100/filesize))
+        loading_message(strong("Allocating memory...#",filecompleted*100/filesize,"%"))
     }
     var oline; oline=file_text_read_string(f)
     file_text_readln(f)
