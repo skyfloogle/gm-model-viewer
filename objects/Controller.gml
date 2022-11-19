@@ -25,6 +25,16 @@ gizmosurf=-1
 genmodels=void
 
 room_speed=display_get_frequency()
+
+alarm[0]=1
+#define Alarm_0
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+///load model loaded with exe
+if (parameter_count()>0) load_model(parameter_string(1))
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
