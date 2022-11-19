@@ -7,7 +7,12 @@ with (ModelFlip) {
 }
 modelc=0
 var modelmap; modelmap=ds_map_create()
+var lasttime; lasttime=0
 i=-1 repeat (facec) { i+=1
+    if (current_time>lasttime+100) {
+        lasttime=current_time
+        loading_message(strong("Generating models...#",i*100/facec,"%"))
+    }
     var f; f=ds_list_find_value(faces,i)
     var o,g,mat; o=ds_list_find_value(f,0) g=ds_list_find_value(f,1) mat=ds_list_find_value(f,2)
     var blend; if (mat>=0) blend=mats[mat,2] else blend=c_white
