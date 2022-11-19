@@ -56,7 +56,10 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
 } else if (point_in_rectangle(mouse_x,mouse_y,room_width-100,100,room_width,room_height)) {
     var ok; ok=false
     with (ModelExport) if (y<ystart) {ok=true break}
-    if (ok) with (ModelExport) y+=8
+    if (ok) {
+        with (ModelExport) y+=8
+        with (ModelVisible) y+=8
+    }
 }
 #define Mouse_61
 /*"/*'/**//* YYD ACTION
@@ -71,7 +74,10 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
 } else if (point_in_rectangle(mouse_x,mouse_y,room_width-100,100,room_width,room_height)) {
     var ok; ok=false
     with (ModelExport) if (y>room_height-30) {ok=true break}
-    if (ok) with (ModelExport) y-=8
+    if (ok) {
+        with (ModelExport) y-=8
+        with (ModelVisible) y-=8
+    }
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION
@@ -85,6 +91,7 @@ d3d_set_projection_ext(camx,camy,camz,0,0,0,upx,upy,upz,fov,room_width/room_heig
 dx8_set_cull_mode(culling)
 texture_set_repeat(true)
 i=-1 repeat (modelc) { i+=1
+    if (!models[i,4]) continue
     var mat; mat=models[i,3]
     var tex;
     if (mat>=0) tex=background_get_texture(mats[mat,1]) else tex=-1

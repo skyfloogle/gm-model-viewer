@@ -7,6 +7,7 @@ if (f<0) {
 set_working_directory(filename_path(argument0))
 modelc=0
 with (ModelExport) instance_destroy()
+with (ModelVisible) instance_destroy()
 screen_redraw()
 loading_message("Deallocating old model...")
 i=0 repeat (ds_list_size(faces)) {ds_list_destroy(ds_list_find_value(faces,i)) i+=1}

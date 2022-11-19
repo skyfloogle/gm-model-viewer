@@ -1,4 +1,5 @@
 ///generate_models
+var i;
 repeat (modelc) {modelc-=1 d3d_model_destroy(models[modelc,0])}
 var axto,axsc;
 with (ModelFlip) {
@@ -103,10 +104,13 @@ i=-1 repeat (facec) { i+=1
 }
 ds_map_destroy(modelmap)
 with (ModelExport) instance_destroy()
+with (ModelVisible) instance_destroy()
 var Y; Y=100+30
 i=-1 repeat (modelc) { i+=1
+    models[i,4]=true
     Y+=30+20*(models[i,1]!="")+20*(models[i,2]!="")+20*(models[i,3]>=0)
     d3d_model_primitive_end(models[i,0])
-    (instance_create(room_width-80,Y,ModelExport)).m=i
+    with (instance_create(room_width-80-8+25,Y,ModelExport)) m=i
+    with (instance_create(room_width-100+8,Y+4,ModelVisible)) m=i
 }
 with (ModelExport) event_perform(ev_other,ev_room_start)
