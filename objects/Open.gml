@@ -24,6 +24,6 @@ action_id=603
 applies_to=self
 */
 draw_set_color(c_black)
-draw_rectangle(room_width-100,0,room_width,130,false)
+draw_rectangle(room_width-100,0,room_width,130+30,false)
 draw_set_color(c_white)
 event_inherited()

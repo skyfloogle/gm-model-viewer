@@ -102,6 +102,6 @@ draw_set_color(c_white)
 
 if (modelc==0) {
     draw_set_halign(fa_center)
-    draw_text(room_width-50,140,"No model#F1 for help")
+    draw_text(room_width-50,140+25,"No model#F1 for help")
     draw_set_halign(fa_left)
 }

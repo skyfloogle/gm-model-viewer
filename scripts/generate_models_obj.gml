@@ -98,7 +98,7 @@ i=-1 repeat (facec) { i+=1
 }
 ds_map_destroy(modelmap)
 with (ModelExport) instance_destroy()
-var Y; Y=100
+var Y; Y=100+30
 i=-1 repeat (modelc) { i+=1
     Y+=30+20*(models[i,1]!="")+20*(models[i,2]!="")+20*(models[i,3]>=0)
     d3d_model_primitive_end(models[i,0])
