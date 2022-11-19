@@ -15,6 +15,10 @@ fov=45
 scale=1
 flip_tris=true
 culling=cull_none
+verts=ds_grid_create(0,0)
+norms=ds_grid_create(0,0)
+texs=ds_grid_create(0,0)
+faces=ds_list_create()
 
 gizmosurf=-1
 

@@ -16,7 +16,6 @@ var fn; fn=get_open_filename("Wavefront OBJ|*.obj","")
 if (!file_exists(fn)) exit
 with (Controller) {
     load_model(fn)
-    generate_models()
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION

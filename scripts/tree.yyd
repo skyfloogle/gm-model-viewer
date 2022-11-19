@@ -6,3 +6,4 @@
 |void
 |generate_models
 |load_model
+|loading_message

@@ -8,7 +8,8 @@ with (ModelFlip) {
 modelc=0
 var modelmap; modelmap=ds_map_create()
 i=-1 repeat (facec) { i+=1
-    var o,g,mat; o=faces[i,0] g=faces[i,1] mat=faces[i,2]
+    var f; f=ds_list_find_value(faces,i)
+    var o,g,mat; o=ds_list_find_value(f,0) g=ds_list_find_value(f,1) mat=ds_list_find_value(f,2)
     var blend; if (mat>=0) blend=mats[mat,2] else blend=c_white
     var mkey; mkey=strong(o,"_",g,"_",mat)
     var mdl; if (ds_map_exists(modelmap,mkey)) {
@@ -24,65 +25,70 @@ i=-1 repeat (facec) { i+=1
         dsmap(modelmap,mkey,mdl)
         modelc+=1
     }
-    models[mdl,4]+=max(0,faces[i,3]-2)*3
+    models[mdl,4]+=max(0,ds_list_find_value(f,3)-2)*3
     if (models[mdl,4]>32000) {
         d3d_model_primitive_end(models[mdl,0])
         d3d_model_primitive_begin(models[mdl,0],pr_trianglelist)
-        models[mdl,4]=(faces[i,3]-2)*3
+        models[mdl,4]=(ds_list_find_value(f,3)-2)*3
     }
-    j=0 repeat (faces[i,3]-2) { j+=1
+    j=0 repeat (ds_list_find_value(f,3)-2) { j+=1
         var bits; bits[0]=0 bits[1]=j bits[2]=j+1
         k=pick(flip_tris,0,2) repeat (3) {
             var v,t,n;
-            v=faces[i,bits[k]*3+4]
-            t=faces[i,bits[k]*3+5]
-            n=faces[i,bits[k]*3+6]
+            v=ds_list_find_value(f,bits[k]*3+4)
+            t=ds_list_find_value(f,bits[k]*3+5)
+            n=ds_list_find_value(f,bits[k]*3+6)
             k+=pick(flip_tris,1,-1)
             if (n>=0 && t>=0) {
                 d3d_model_vertex_normal_texture_color(
                     models[mdl,0],
-                    axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
-                    axsc[0]*norms[n,axto[0]],axsc[1]*norms[n,axto[1]],axsc[2]*norms[n,axto[2]],
-                    texs[t,0],texs[t,1],
+                    axsc[0]*ds_grid_get(verts,v,axto[0]),
+                    axsc[1]*ds_grid_get(verts,v,axto[1]),
+                    axsc[2]*ds_grid_get(verts,v,axto[2]),
+
+                    axsc[0]*ds_grid_get(norms,n,axto[0]),
+                    axsc[1]*ds_grid_get(norms,n,axto[1]),
+                    axsc[2]*ds_grid_get(norms,n,axto[2]),
+                    ds_grid_get(texs,t,0),ds_grid_get(texs,t,1),
                     make_color_rgb(
-                        verts[v,3]*color_get_red(blend),
-                        verts[v,4]*color_get_red(blend),
-                        verts[v,5]*color_get_red(blend),
+                        ds_grid_get(verts,v,3)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_red(blend),
+                        ds_grid_get(verts,v,5)*color_get_red(blend),
                     ),
                     1
                 )
             } else if (n>=0) {
                 d3d_model_vertex_normal_color(
                     models[mdl,0],
-                    axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
-                    axsc[0]*norms[n,axto[0]],axsc[1]*norms[n,axto[1]],axsc[2]*norms[n,axto[2]],
+                    axsc[0]*ds_grid_get(verts,v,axto[0]),axsc[1]*ds_grid_get(verts,v,axto[1]),axsc[2]*ds_grid_get(verts,v,axto[2]),
+                    axsc[0]*ds_grid_get(norms,n,axto[0]),axsc[1]*ds_grid_get(norms,n,axto[1]),axsc[2]*ds_grid_get(norms,n,axto[2]),
                     make_color_rgb(
-                        verts[v,3]*color_get_red(blend),
-                        verts[v,4]*color_get_red(blend),
-                        verts[v,5]*color_get_red(blend),
+                        ds_grid_get(verts,v,3)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_red(blend),
+                        ds_grid_get(verts,v,5)*color_get_red(blend),
                     ),
                     1
                 )
             } else if (t>=0) {
                 d3d_model_vertex_texture_color(
                     models[mdl,0],
-                    axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
-                    texs[t,0],texs[t,1],
+                    axsc[0]*ds_grid_get(verts,v,axto[0]),axsc[1]*ds_grid_get(verts,v,axto[1]),axsc[2]*ds_grid_get(verts,v,axto[2]),
+                    ds_grid_get(texs,t,0),ds_grid_get(texs,t,1),
                     make_color_rgb(
-                        verts[v,3]*color_get_red(blend),
-                        verts[v,4]*color_get_red(blend),
-                        verts[v,5]*color_get_red(blend),
+                        ds_grid_get(verts,v,3)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_red(blend),
+                        ds_grid_get(verts,v,5)*color_get_red(blend),
                     ),
                     1
                 )
             } else {
                 d3d_model_vertex_color(
                     models[mdl,0],
-                    axsc[0]*verts[v,axto[0]],axsc[1]*verts[v,axto[1]],axsc[2]*verts[v,axto[2]],
+                    axsc[0]*ds_grid_get(verts,v,axto[0]),axsc[1]*ds_grid_get(verts,v,axto[1]),axsc[2]*ds_grid_get(verts,v,axto[2]),
                     make_color_rgb(
-                        verts[v,3]*color_get_red(blend),
-                        verts[v,4]*color_get_red(blend),
-                        verts[v,5]*color_get_red(blend),
+                        ds_grid_get(verts,v,3)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_red(blend),
+                        ds_grid_get(verts,v,5)*color_get_red(blend),
                     ),
                     1
                 )

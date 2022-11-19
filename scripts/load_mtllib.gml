@@ -29,6 +29,10 @@ while (!file_text_eof(f)) {
             var tex; tex=string_remainder(oline)
             if (file_exists(tex)) {
                 mats[current_mat,1]=background_add(tex,false,false)
+                if (!background_exists(mats[current_mat,1])) {
+                    show_error("Texture "+tex+" is in an unsupported format.",false)
+                    mats[current_mat,1]=-1
+                }
             } else {
                 show_error("Texture file "+tex+" was not found.",false)
                 mats[current_mat,1]=bgBlank

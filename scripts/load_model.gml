@@ -8,3 +8,5 @@ default: {
     show_message("That format isn't currently supported.")
 }break
 }
+loading_message("Generating models...")
+generate_models()

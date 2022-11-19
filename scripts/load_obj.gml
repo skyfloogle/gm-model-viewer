@@ -5,10 +5,46 @@ if (f<0) {
     exit
 }
 set_working_directory(filename_path(argument0))
+modelc=0
+with (ModelExport) instance_destroy()
+screen_redraw()
+loading_message("Deallocating old model...")
+i=0 repeat (ds_list_size(faces)) {ds_list_destroy(ds_list_find_value(faces,i)) i+=1}
+ds_list_clear(faces)
+facec=0
+loading_message("Allocating memory...")
 vertc=0
 normc=0
 texc=0
 facec=0
+linec=0
+
+filesize=file_size(argument0)
+filecompleted=0
+
+var lasttime; lasttime=0
+while (!file_text_eof(f)) {
+    if (current_time>lasttime+100) {
+        lasttime=current_time
+        loading_message(strong("Allocating memory...#",filecompleted*100/filesize))
+    }
+    var oline; oline=file_text_read_string(f)
+    file_text_readln(f)
+    filecompleted+=string_length(oline)+1
+    vertc+=string_pos("v ",oline)==1
+    normc+=string_pos("vn ",oline)==1
+    texc+=string_pos("vt ",oline)==1
+    facec+=string_pos("f ",oline)==1
+    linec+=1
+}
+ds_grid_resize(verts,vertc,6)
+ds_grid_resize(norms,normc,3)
+ds_grid_resize(texs,texc,2)
+vertc=0
+normc=0
+texc=0
+file_text_close(f)
+f=file_text_open_read(argument0)
 matc=0
 groupc=0
 matnames=ds_map_create()
@@ -16,55 +52,62 @@ groupnames=ds_map_create()
 var current_mat; current_mat=-1
 var current_group; current_group=""
 var current_obj; current_obj=""
+clinei=0
+lasttime=0
 while (!file_text_eof(f)) {
+    if (current_time>lasttime+100) {
+        lasttime=current_time
+        loading_message(strong("Loading data...#",clinei*100/linec,"%#",clinei," / ",linec))
+    }
+    clinei+=1
     var oline; oline=file_text_read_string(f)
     var line; line=merge_spaces(oline)
     file_text_readln(f)
     string_token_start(line," ")
     var cmd; cmd=string_token_next()
-    var varname;
+    var grid,ident;
     switch (cmd) {
-        case "v": varname="vert"
-        case "vt": if (cmd=="vt") varname="tex"
-        case "vn": if (cmd=="vn") varname="norm"
+        case "v": {grid=verts ident=vertc vertc+=1}
+        case "vt": if (cmd=="vt") {grid=texs ident=texc texc+=1}
+        case "vn": if (cmd=="vn") {grid=norms ident=normc normc+=1}
         {
             for (i=0;i<6;i+=1) {
                 var tmp; tmp=string_token_next()
                 if (tmp=="") break
-                variable_local_array2_set(varname+"s",variable_local_get(varname+"c"),i,real(tmp))
+                ds_grid_set(grid,ident,i,real(tmp))
             }
             if (cmd=="vt") {
                 // flip y coordinate
-                texs[texc,1]=1-texs[texc,1]
+                ds_grid_set(texs,ident,1,1-ds_grid_get(texs,ident,1))
             }
             // vertex colours
             if (i<6 && cmd=="v") {
-                verts[vertc,3]=1
-                verts[vertc,4]=1
-                verts[vertc,5]=1
+                ds_grid_set(verts,ident,3,1)
+                ds_grid_set(verts,ident,4,1)
+                ds_grid_set(verts,ident,5,1)
             }
-            variable_local_set(varname+"c",variable_local_get(varname+"c")+1)
         }break
         case "f": {
-            faces[facec,0]=current_obj
-            faces[facec,1]=current_group
-            faces[facec,2]=current_mat
+            var face; face=ds_list_create()
+            ds_list_add(face,current_obj)
+            ds_list_add(face,current_group)
+            ds_list_add(face,current_mat)
             // load all points
             var points,pointc; pointc=-1
             do {
                 pointc+=1
                 points[pointc]=string_token_next()
             } until (points[pointc]=="")
-            faces[facec,3]=pointc
+            ds_list_add(face,pointc)
             for (i=0;i<pointc;i+=1) {
                 string_token_start(points[i],"/")
-                for (j=0;j<3;j+=1) {
+                repeat (3) {
                     tmp=string_token_next()
-                    if (tmp!="") faces[facec,4+i*3+j]=real(tmp)-1
-                    else faces[facec,4+i*3+j]=-1
+                    if (tmp!="") ds_list_add(face,real(tmp)-1)
+                    else ds_list_add(face,-1)
                 }
             }
-            facec+=1
+            ds_list_add(faces,face)
         }break
         case "mtllib": {
             load_mtllib(string_remainder(oline))
