@@ -42,7 +42,7 @@ action_id=603
 applies_to=self
 */
 ///Window caption
-room_caption=strong("Game Maker 3D Viewer - ",fps," FPS")
+room_caption=str_cat("Game Maker 3D Viewer - ",fps," FPS")
 #define Mouse_60
 /*"/*'/**//* YYD ACTION
 lib_id=1
