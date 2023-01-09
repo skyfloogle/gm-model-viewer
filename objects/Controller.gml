@@ -27,6 +27,8 @@ genmodels=void
 room_speed=display_get_frequency()
 
 alarm[0]=1
+
+file_drag_enable(true)
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -43,6 +45,11 @@ applies_to=self
 */
 ///Window caption
 room_caption=str_cat("Game Maker 3D Viewer - ",fps," FPS")
+for (i=file_drag_count()-1;i>=0;i-=1) {
+    var fn; fn=file_drag_name(i)
+    if (string_lower(filename_ext(fn))==".obj") {load_model(fn) break}
+}
+file_drag_clear()
 #define Mouse_60
 /*"/*'/**//* YYD ACTION
 lib_id=1
