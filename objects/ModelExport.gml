@@ -38,6 +38,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if (y<-20 || y>room_height+80) exit
 var o,g,mat;
 o=Controller.models[m,1]
 g=Controller.models[m,2]
