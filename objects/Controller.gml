@@ -57,8 +57,8 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
     var ok; ok=false
     with (ModelExport) if (y<ystart) {ok=true break}
     if (ok) {
-        with (ModelExport) y+=8
-        with (ModelVisible) y+=8
+        with (ModelExport) y+=16
+        with (ModelVisible) y+=16
     }
 }
 #define Mouse_61
@@ -75,8 +75,8 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
     var ok; ok=false
     with (ModelExport) if (y>room_height-30) {ok=true break}
     if (ok) {
-        with (ModelExport) y-=8
-        with (ModelVisible) y-=8
+        with (ModelExport) y-=16
+        with (ModelVisible) y-=16
     }
 }
 #define Draw_0
