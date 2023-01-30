@@ -12,6 +12,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if (mouse_y<100) exit
 var o,g,mat;
 o=Controller.models[m,1]
 g=Controller.models[m,2]

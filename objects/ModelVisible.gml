@@ -13,6 +13,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if (mouse_y<100) exit
 image_index=!image_index
 Controller.models[m,4]=image_index
 #define Draw_0
