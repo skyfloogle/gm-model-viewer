@@ -27,6 +27,8 @@ while (!file_text_eof(f)) {
         }break
         case "map_Kd": {
             var tex; tex=string_remainder(oline)
+            if (string_pos('/',tex)==1 || string_pos('\',tex)==1)
+                tex=string_delete(tex,1,1)
             if (file_exists(tex)) {
                 mats[current_mat,1]=background_add(tex,false,false)
                 if (!background_exists(mats[current_mat,1])) {
