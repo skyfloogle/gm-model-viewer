@@ -27,7 +27,7 @@ var lasttime; lasttime=0
 while (!file_text_eof(f)) {
     if (current_time>lasttime+100) {
         lasttime=current_time
-        loading_message(strong("Allocating memory...#",filecompleted*100/filesize,"%"))
+        loading_message(str_cat("Allocating memory...#",filecompleted*100/filesize,"%"))
     }
     var oline; oline=file_text_read_string(f)
     file_text_readln(f)
@@ -58,7 +58,7 @@ lasttime=0
 while (!file_text_eof(f)) {
     if (current_time>lasttime+100) {
         lasttime=current_time
-        loading_message(strong("Loading data...#",clinei*100/linec,"%#",clinei," / ",linec))
+        loading_message(str_cat("Loading data...#",clinei*100/linec,"%#",clinei," / ",linec))
     }
     clinei+=1
     var oline; oline=file_text_read_string(f)
