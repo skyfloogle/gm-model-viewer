@@ -21,8 +21,12 @@ applies_to=self
 */
 var s; s=pick(mouse_button-1,2,4)
 if (image_index mod 2 == mouse_button-1) {
-    with (ModelFlip) if (id!=other.id) {
-        image_index=(image_index+s) mod image_number
+    with (ModelFlip) if (id mod 3 == (other.id + 1) mod 3) {
+        var tmp; tmp=(other.image_index-s+6) mod image_number
+        tmp-=tmp mod 2
+        tmp+=image_index mod 2
+        other.image_index=image_index-image_index mod 2
+        image_index=tmp
     }
     image_index=image_index mod 6
 }
