@@ -58,8 +58,8 @@ i=-1 repeat (facec) { i+=1
                     ds_grid_get(texs,t,0),ds_grid_get(texs,t,1),
                     make_color_rgb(
                         ds_grid_get(verts,v,3)*color_get_red(blend),
-                        ds_grid_get(verts,v,4)*color_get_red(blend),
-                        ds_grid_get(verts,v,5)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_green(blend),
+                        ds_grid_get(verts,v,5)*color_get_blue(blend),
                     ),
                     1
                 )
@@ -70,8 +70,8 @@ i=-1 repeat (facec) { i+=1
                     axsc[0]*ds_grid_get(norms,n,axto[0]),axsc[1]*ds_grid_get(norms,n,axto[1]),axsc[2]*ds_grid_get(norms,n,axto[2]),
                     make_color_rgb(
                         ds_grid_get(verts,v,3)*color_get_red(blend),
-                        ds_grid_get(verts,v,4)*color_get_red(blend),
-                        ds_grid_get(verts,v,5)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_green(blend),
+                        ds_grid_get(verts,v,5)*color_get_blue(blend),
                     ),
                     1
                 )
@@ -82,8 +82,8 @@ i=-1 repeat (facec) { i+=1
                     ds_grid_get(texs,t,0),ds_grid_get(texs,t,1),
                     make_color_rgb(
                         ds_grid_get(verts,v,3)*color_get_red(blend),
-                        ds_grid_get(verts,v,4)*color_get_red(blend),
-                        ds_grid_get(verts,v,5)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_green(blend),
+                        ds_grid_get(verts,v,5)*color_get_blue(blend),
                     ),
                     1
                 )
@@ -93,8 +93,8 @@ i=-1 repeat (facec) { i+=1
                     axsc[0]*ds_grid_get(verts,v,axto[0]),axsc[1]*ds_grid_get(verts,v,axto[1]),axsc[2]*ds_grid_get(verts,v,axto[2]),
                     make_color_rgb(
                         ds_grid_get(verts,v,3)*color_get_red(blend),
-                        ds_grid_get(verts,v,4)*color_get_red(blend),
-                        ds_grid_get(verts,v,5)*color_get_red(blend),
+                        ds_grid_get(verts,v,4)*color_get_green(blend),
+                        ds_grid_get(verts,v,5)*color_get_blue(blend),
                     ),
                     1
                 )
