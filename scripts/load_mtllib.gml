@@ -9,6 +9,7 @@ set_working_directory(filename_path(argument0))
 var current_matname; current_matname=""
 var current_mat; current_mat=0
 
+files=ds_map_create()
 while (!file_text_eof(f)) {
     var oline; oline=file_text_read_string(f)
     var line; line=merge_spaces(oline)
@@ -22,6 +23,7 @@ while (!file_text_eof(f)) {
             mats[current_mat,0]=current_matname
             mats[current_mat,1]=bgBlank
             mats[current_mat,2]=c_white
+            mats[current_mat,3]=""
             dsmap(matnames,current_matname,matc)
             matc+=1
         }break
@@ -29,6 +31,11 @@ while (!file_text_eof(f)) {
             var tex; tex=string_remainder(oline)
             if (string_pos('/',tex)==1 || string_pos('\',tex)==1)
                 tex=string_delete(tex,1,1)
+            mats[current_mat,3]=tex
+            if (ds_map_exists(files,tex)) {
+                mats[current_mat,1]=dsmap(files,tex)
+                continue
+            }
             if (file_exists(tex)) {
                 mats[current_mat,1]=background_add(tex,false,false)
                 if (!background_exists(mats[current_mat,1])) {
@@ -39,6 +46,7 @@ while (!file_text_eof(f)) {
                 show_error("Texture file "+tex+" was not found.",false)
                 mats[current_mat,1]=bgBlank
             }
+            ds_map_add(files,tex,mats[current_mat,1])
         }break
         case "Kd": {
             mats[current_mat,2]=make_color_rgb(
@@ -49,5 +57,6 @@ while (!file_text_eof(f)) {
         }break
     }
 }
+ds_map_destroy(files)
 file_text_close(f)
 set_working_directory(olddir)
