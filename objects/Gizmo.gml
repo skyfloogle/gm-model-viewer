@@ -67,7 +67,7 @@ action_id=603
 applies_to=self
 */
 ///render
-surf=dx8_surface_engage(surf,100,100)
+surf=surface_set(surf,100,100)
 var prim,sec; prim=192 sec=0
 if (dragme) {prim=255 sec=64}
 else if (collision_point(mouse_x,mouse_y,id,false,false)) prim=255
@@ -92,7 +92,7 @@ with (Controller) {
     draw_set_color(c_white)
     d3d_end()
 }
-dx8_surface_disengage()
+surface_reset()
 #define Mouse_53
 /*"/*'/**//* YYD ACTION
 lib_id=1

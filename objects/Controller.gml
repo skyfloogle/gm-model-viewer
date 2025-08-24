@@ -44,7 +44,7 @@ action_id=603
 applies_to=self
 */
 ///Window caption
-room_caption=str_cat("Game Maker 3D Viewer - ",fps," FPS")
+room_caption=str_cat("Game Maker 8.2 Model Viewer - ",fps_fast," FPS")
 for (i=file_drag_count()-1;i>=0;i-=1) {
     var fn; fn=file_drag_name(i)
     if (string_lower(filename_ext(fn))==".obj") {load_model(fn) break}
@@ -95,7 +95,7 @@ applies_to=self
 d3d_start()
 d3d_transform_set_scaling(32,32,32)
 d3d_set_projection_ext(camx,camy,camz,0,0,0,upx,upy,upz,fov,room_width/room_height,1,16000)
-dx8_set_cull_mode(culling)
+d3d_set_cull_mode(culling)
 texture_set_repeat(true)
 i=-1 repeat (modelc) { i+=1
     if (!models[i,4]) continue
