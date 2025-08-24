@@ -38,6 +38,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+draw_set_color(c_ltgray)
 draw_button(bbox_left,bbox_top,bbox_right,bbox_bottom,!down)
 draw_set_color(c_black)
 draw_text(x+4,y+4,text)
