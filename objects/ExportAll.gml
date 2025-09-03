@@ -40,5 +40,5 @@ for (m=0;m<Controller.modelc;m+=1) {
     }
     if (fn=="") fn="model"
     if (g3z) d3d_model_save_g3z(Controller.models[m,0],dir+"/"+fn+".g3z")
-    d3d_model_save(Controller.models[m,0],dir+"/"+fn+".g3d")
+    else d3d_model_save(Controller.models[m,0],dir+"/"+fn+".g3d")
 }
