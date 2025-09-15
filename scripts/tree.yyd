@@ -1,7 +1,9 @@
 |merge_spaces
 |load_obj
+|load_g3d
 |load_mtllib
 |generate_models_obj
+|generate_models_g3d
 |string_remainder
 |void
 |generate_models

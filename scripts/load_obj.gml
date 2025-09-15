@@ -118,7 +118,7 @@ while (!file_text_eof(f)) {
             if (ds_map_exists(matnames,newmat)) {
                 current_mat=dsmap(matnames,newmat)
             } else {
-                show_message("This model is missing a material '"+newmat+"'.#Those parts will appear as white.")
+                show_message("This model is missing a material '"+newmat+"'.#Those parts will appear as pink checkerboard.")
                 current_mat=-1
             }
         }break

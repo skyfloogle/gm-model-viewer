@@ -12,7 +12,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var fn; fn=get_open_filename("Wavefront OBJ|*.obj","")
+var fn; fn=get_open_filename("Known model formats|*.obj;*.g3d;*.g3z","")
 if (!file_exists(fn)) exit
 with (Controller) {
     load_model(fn)

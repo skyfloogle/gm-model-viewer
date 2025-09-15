@@ -29,6 +29,8 @@ room_speed=display_get_frequency()
 alarm[0]=1
 
 file_drag_enable(true)
+
+texdef=background_get_texture(bgTexDefault)
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -43,11 +45,13 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-///Window caption
+///Window caption and filedrag
 room_caption=str_cat("Game Maker 8.2 Model Viewer - ",fps_fast," FPS")
+
 for (i=file_drag_count()-1;i>=0;i-=1) {
     var fn; fn=file_drag_name(i)
-    if (string_lower(filename_ext(fn))==".obj") {load_model(fn) break}
+    ext=string_lower(filename_ext(fn))
+    if (ext==".obj" or ext==".g3d" or ext==".g3z") {load_model(fn) break}
 }
 file_drag_clear()
 #define Mouse_60
@@ -101,7 +105,7 @@ i=-1 repeat (modelc) { i+=1
     if (!models[i,4]) continue
     var mat; mat=models[i,3]
     var tex;
-    if (mat>=0) tex=background_get_texture(mats[mat,1]) else tex=-1
+    if (mat>=0) tex=background_get_texture(mats[mat,1]) else tex=texdef
     d3d_model_draw(models[i,0],0,0,0,tex)
 }
 texture_set_repeat(false)

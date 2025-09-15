@@ -14,6 +14,14 @@ applies_to=self
 */
 if (mouse_y<100) exit
 var o,g,mat;
+
+g3z=show_message_ext("Please select the export format.","G3D","G3Z","Cancel")
+
+if (g3z==0 or g3z==3) exit
+
+g3z=(g3z==2)
+
+
 o=Controller.models[m,1]
 g=Controller.models[m,2]
 mat=Controller.models[m,3]
@@ -30,9 +38,15 @@ if (mat>=0) {
     fn+=Controller.mats[mat,0]
 }
 if (fn=="") fn="model"
-var fn; fn=get_save_filename("Game Maker model|*.g3d",fn+".g3d")
-if (fn=="") exit
-d3d_model_save(Controller.models[m,0],fn)
+if (g3z) {
+    var fn; fn=get_save_filename("Packed GM Model|*.g3z",fn+".g3z")
+    if (fn=="") exit
+    d3d_model_save_g3z(Controller.models[m,0],fn)
+} else {
+    var fn; fn=get_save_filename("Game Maker model|*.g3d",fn+".g3d")
+    if (fn=="") exit
+    d3d_model_save(Controller.models[m,0],fn)
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

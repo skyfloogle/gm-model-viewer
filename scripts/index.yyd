@@ -7,3 +7,5 @@ void
 generate_models
 load_model
 loading_message
+generate_models_g3d
+load_g3d
