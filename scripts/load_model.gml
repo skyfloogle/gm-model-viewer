@@ -10,6 +10,7 @@ genmodels=generate_models_g3d
 }break
 default: {
     show_message("That format isn't currently supported.")
+    exit
 }break
 }
 loading_message("Generating models...")

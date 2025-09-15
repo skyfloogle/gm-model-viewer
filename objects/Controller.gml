@@ -90,6 +90,13 @@ if (!Gizmo.drag && point_in_rectangle(mouse_x,mouse_y,100,0,room_width-100,room_
         with (ModelVisible) y-=16
     }
 }
+#define Other_2
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+if (parameter_count()) load_model(parameter_string(1))
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
